@@ -33,7 +33,7 @@ pipeline{
                 }
             }
         }
-        stage ("Identifying misconfigs using datree in helm charts"){
+        stage ("Identifying misconfigs using datree in helm charts") {
             steps{
                 script{
                     dir('kubernets/myapp/') {
@@ -43,6 +43,21 @@ pipeline{
                 }       
             }
         }
+    }
+}            
+        stage ("Pushing the helm charts to nexus repo"){
+            steps{
+                script{
+                    withCredentials([string(credentialsId: 'nexus_passwd', variable: 'nexus_creds')]) {
+                    dir('kubernets/myapp/') {
+                    sh ''' 
+                    helmversion=$(helm show chart myapp | grep version | cut -d: -f 2 |tr -d '' )
+                    tar  -czvf myapp-${helmversion}.tgz myapp/
+                    curl -u admin:$nexus_creds http://13.233.131.100:8081/repository/helm-hosted/ --upload-file myapp-${helmversion}.tgz -v
+                    '''
+                }
+            }
+        }
     }    
     post {
 		always {
@@ -50,3 +65,5 @@ pipeline{
 		}
 	}
 }
+
+        
