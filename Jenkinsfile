@@ -1,11 +1,11 @@
 pipeline {
     agent any 
     environment {
-                VERSION = "${env.BUILD_ID}"
+                VERSION = ${env.BUILD_ID}
                 }
     stages{
         stage("sonar quality check"){
-                agent any {
+                agent {
                     docker {
                         image 'maven'
                     }
