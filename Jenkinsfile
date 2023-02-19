@@ -13,17 +13,21 @@ pipeline{
                             sh 'mvn clean package sonar:sonar'
                     }
                 }
-            }
-        }
-    }
-}      
-        stage('Quality Gate status Check'){
-
-             steps{
-                    script{     
-                waitForQualityGate abortPipeline: false, credentialsId: 'sonar-token'
+             }
         }
     }
 }
+              stage('Quality Gate status Check'){
 
-            
+             steps{
+
+              script{
+                   
+                 waitForQualityGate abortPipeline: false, credentialsId: 'sonar-token'
+              }
+        
+            }
+        }
+    
+
+
