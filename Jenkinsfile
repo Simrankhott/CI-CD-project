@@ -4,7 +4,8 @@ pipeline{
         VERSION = "${env.BUILD_ID}"
     }
 
-     stages{
+    stages{
+
         stage ("sonar quality check"){
             agent {
                 docker {
