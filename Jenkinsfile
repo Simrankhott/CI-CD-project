@@ -57,9 +57,24 @@ pipeline{
                     }
                 }
             }
-        }
-        
+        }    
     }
+        stage('Deploying application on k8s cluster') {
+    steps {
+        script{
+            withCredentials([kubeconfigFile(credentialsId: 'kubernetes-config', variable: 'KUBECONFIG'),
+                             file(credentialsId: 'kconfig', variable: 'KCONFIG')]) {
+                dir('kubernetes/') {
+                    sh 'echo "$KCONFIG" > kconfig'
+                    sh 'export KUBECONFIG=$KUBECONFIG:kconfig'
+                    sh 'helm upgrade --install --set image.repository="34.125.214.226:8083/springapp" --set image.tag="${VERSION}" myjavaapp myapp/ ' 
+                }
+            }
+        }
+    }
+}
+
+    
     post {
         always {
             mail bcc: '', body: "<br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL de build: ${env.BUILD_URL}", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "${currentBuild.result} CI: Project name -> ${env.JOB_NAME}", to: "khotsimran04@gmail.com";  
