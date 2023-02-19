@@ -3,8 +3,8 @@ pipeline {
     environment {
                 VERSION = "${env.BUILD_ID}"
                 }
-    stages{
-        stage("sonar quality check"){
+        stages{
+            stage("sonar quality check"){
                 agent {
                     docker {
                         image 'maven'
@@ -18,7 +18,7 @@ pipeline {
                 }
              }
         
-             stage ("docker build and docker push to nexus repo") {
+            stage ("docker build and docker push to nexus repo") {
                 steps {
                     script{
                         withCredentials([string(credentialsId: 'nexus_passwd', variable: 'nexus_creds')]) {
