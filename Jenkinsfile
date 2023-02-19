@@ -26,11 +26,13 @@ pipeline{
                           docker login -u admin -p $nexus_creds 13.126.53.240:8083
                           docker push  13.126.53.240:8083/springapp:${VERSION} 
                           docker rmi  13.126.53.240:8083/springapp:${VERSION} 
-                        } '''
+                         '''
                     }
                 }
             }
         }
     }
 }
+}
+
  
