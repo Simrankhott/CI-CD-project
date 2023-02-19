@@ -85,19 +85,21 @@ pipeline {
             }
         }
     }
-      stage('verifying app deployment') {
-            steps {
-                script {
-                    withCredentials([file(credentialsId: 'kconfig-secret', variable: 'KCONFIG')]) {
-                        sh 'kubectl run curl --image=curlimages/curl -i --rm --restart=Never -- curl myjavaapp-myapp:8080'
-                    }
-                }
+     stage('verifying app deployment') {
+    steps {
+        script {
+            withCredentials([file(credentialsId: 'kconfig-secret', variable: 'KCONFIG')]) {
+                sh 'kubectl run curl --image=curlimages/curl -i --rm --restart=Never -- curl myjavaapp-myapp:8080'
             }
         }
     }
-    
-    post {
-        always {
-            mail bcc: '', body: "<br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL de build: ${env.BUILD_URL}", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "${currentBuild.result} CI: Project name -> ${env.JOB_NAME}", to: "khotsimran04@gmail.com";  
-        }
+}
+
+post {
+    always {
+        mail bcc: '', body: "<br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL de build: ${env.BUILD_URL}", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "${currentBuild.result} CI: Project name -> ${env.JOB_NAME}", to: "khotsimran04@gmail.com"
     }
+}
+}
+
+
