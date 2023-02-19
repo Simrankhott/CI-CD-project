@@ -3,6 +3,7 @@ pipeline{
     environment{
         VERSION = "${env.BUILD_ID}"
     }
+
     stages{
         stage("sonar quality check"){
             agent {
@@ -10,9 +11,6 @@ pipeline{
                     image 'maven'
                 }
             }
-        }
-    }
-}
             steps{
                 script{
                     withSonarQubeEnv(credentialsId: 'sonar-token') 
@@ -28,8 +26,11 @@ pipeline{
                           docker login -u admin -p $nexus_creds 13.126.53.240:8083
                           docker push  13.126.53.240:8083/springapp:${VERSION} 
                           docker rmi  13.126.53.240:8083/springapp:${VERSION} 
-                         '''
+                        } '''
                     }
                 }
             }
         }
+    }
+}
+ 
