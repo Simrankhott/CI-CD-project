@@ -4,7 +4,7 @@ pipeline{
         VERSION = "${env.BUILD_ID}"
     }
 
-    stages{
+     stages{
         stage("sonar quality check"){
             agent {
                 docker {
@@ -13,10 +13,11 @@ pipeline{
             }
             steps{
                 script{
-                    withSonarQubeEnv(credentialsId: 'sonar-token') 
+                    withSonarQubeEnv(credentialsId: 'sonar-token') {
+                    }
                 }
-            }
-                           
+            }      
+        
         stage("docker build & docker push to nexus repo"){
             steps{
                 script{
