@@ -32,12 +32,13 @@ pipeline{
                 }
             }
         }
-        stage("Identifying misconfigs using datree in helm charts")
+        stage("Identifying misconfigs using datree in helm charts"){
             steps{
                 script{
                     dir('kubernets/app/') {
                         sh 'helm datree test . '
-                }
+                    } 
+                }       
             }
         }
     }    
