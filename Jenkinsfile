@@ -11,7 +11,6 @@ pipeline {
                     image 'maven'
                 }
             }
-        }    
             steps {
                 script {
                     withSonarQubeEnv(credentialsId: 'sonar-token') {
@@ -25,11 +24,11 @@ pipeline {
                 script {
                     withCredentials([string(credentialsId: 'nexus_passwd', variable: 'nexus_creds')]) {
                         sh '''
-                          docker login -u admin -p ${nexus_creds} 13.233.131.100:8083
-                          docker build -t 13.233.131.100:8083/springapp:${VERSION} .
-                          docker push 13.233.131.100:8083/springapp:${VERSION} 
-                          docker rmi 13.233.131.100:8083/springapp:${VERSION} 
-                         '''
+                            docker login -u admin -p ${nexus_creds} 13.233.131.100:8083
+                            docker build -t 13.233.131.100:8083/springapp:${VERSION} .
+                            docker push 13.233.131.100:8083/springapp:${VERSION} 
+                            docker rmi 13.233.131.100:8083/springapp:${VERSION} 
+                        '''
                     }
                 }
             }
@@ -38,7 +37,8 @@ pipeline {
             steps {
                 script {
                     dir('kubernetes/') {
-                        withEnv(['DATREE_TOKEN=2e7eeda6-aeae-4d04-9ce1-5fd0f8e5edaf']) {
+                        withEnv(['DATREE_TOKEN=2e7eeda6-aeae-4d04-9ce1-5fd0f8e5edaf'])
+
                             sh 'helm datree test myapp/'
                         }
                     }    
