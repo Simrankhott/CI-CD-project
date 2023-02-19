@@ -33,18 +33,19 @@ pipeline{
                 }
             }
         }
-        stage ("Identifying misconfigs using datree in helm charts") {
+        stage('Identifying misconfigs using datree in helm charts'){
             steps{
                 script{
-                    dir('kubernets/myapp/') {
+
+                    dir('kubernetes/') {
                         withEnv(['DATREE_TOKEN=2e7eeda6-aeae-4d04-9ce1-5fd0f8e5edaf']) {
-                        sh 'helm datree test . '
-                    } 
-                }       
-            }
-        }
-    }
-}            
+                              sh 'helm datree test myapp/'
+                        }
+                    }    
+               }
+           }
+        }        
+    }        
         stage ("Pushing the helm charts to nexus repo"){
             steps{
                 script{
