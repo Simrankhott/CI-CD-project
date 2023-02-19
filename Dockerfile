@@ -5,6 +5,6 @@ RUN mvn install
 
 FROM openjdk:11.0
 WORKDIR /app
-COPY --from=build /app/target/Uber.jar /app/
+COPY --from=build /app/target/devops-integration.jar /app/
 EXPOSE 9099
-CMD ["java","-jar","Uber.jar"]
+CMD ["java","-jar","devops-integration.jar"]
