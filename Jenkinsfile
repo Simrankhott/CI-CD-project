@@ -4,6 +4,7 @@ pipeline {
         VERSION = "${env.BUILD_ID}"
         KUBECONFIG = credentials('kconfig-secret')
     }
+}
     stages {
         stage("sonar quality check") {
             agent {
@@ -11,6 +12,7 @@ pipeline {
                     image 'maven'
                 }
             }
+        }    
             steps {
                 script {
                     withSonarQubeEnv(credentialsId: 'sonar-token') {
@@ -70,22 +72,19 @@ pipeline {
             }
         }
         stage('Deploying application on k8s cluster') {
-            steps {
-                script {
-                    withCredentials([file(credentialsId: 'kconfig-secret', variable: 'KCONFIG')]) {
-                        dir('kubernetes/') {
-                            sh 'echo "$KCONFIG" > kconfig.txt'
-                            sh 'export KUBECONFIG=kconfig.txt'
-                            sh 'helm upgrade --install --set image.repository="34.125.214.226:8083/springapp" --set image.tag="${VERSION}" myjavaapp myapp/'
-                       
-
-                        }
-                    }
+    steps {
+        script {
+            withCredentials([file(credentialsId: 'kconfig-secret', variable: 'KCONFIG')]) {
+                dir('kubernetes/') {
+                    sh 'echo "$KCONFIG" > kconfig.txt'
+                    sh 'export KUBECONFIG=kconfig.txt'
+                    sh 'helm upgrade --install --set image.repository="34.125.214.226:8083/springapp" --set image.tag="${VERSION}" myjavaapp myapp/'
                 }
             }
         }
     }
-     stage('verifying app deployment') {
+}
+    stage('verifying app deployment') {
     steps {
         script {
             withCredentials([file(credentialsId: 'kconfig-secret', variable: 'KCONFIG')]) {
@@ -98,8 +97,7 @@ pipeline {
 post {
     always {
         mail bcc: '', body: "<br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL de build: ${env.BUILD_URL}", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "${currentBuild.result} CI: Project name -> ${env.JOB_NAME}", to: "khotsimran04@gmail.com"
-    }
-}
+    }  
 }
 
 
