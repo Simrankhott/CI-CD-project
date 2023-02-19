@@ -61,12 +61,11 @@ pipeline {
         stage('Deploying application on k8s cluster') {
             steps {
                 script {
-                    withCredentials([kubeconfigFile(credentialsId: 'kubernetes-config', variable: 'KUBECONFIG'),
-                                     file(credentialsId: 'kconfig', variable: 'KCONFIG')]) {
+                    withCredentials([file(credentialsId: 'kconfig-secret', variable: 'KCONFIG')]) {
                         dir('kubernetes/') {
-                            sh 'echo "$KCONFIG" > kconfig'
-                            sh 'export KUBECONFIG=$KUBECONFIG:kconfig'
-                            sh 'helm upgrade --install --set image.repository="34.125.214.226:8083/springapp" --set image.tag="${VERSION}" myjavaapp myapp/ ' 
+                            sh 'cp $KCONFIG kconfig.txt'
+                            sh 'export KUBECONFIG=$KUBECONFIG:kconfig.txt'
+                            sh 'helm upgrade --install --set image.repository="34.125.214.226:8083/springapp" --set image.tag="${VERSION}" myjavaapp myapp/'
                         }
                     }
                 }
