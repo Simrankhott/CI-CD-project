@@ -28,6 +28,7 @@ pipeline{
                           docker push 15.207.112.200:8083/springapp:${VERSION} 
                           docker rmi 15.207.112.200:8083/springapp:${VERSION} 
                          '''
+                        }
                     }
                 }
             }
@@ -36,6 +37,7 @@ pipeline{
             steps{
                 script{
                     dir('kubernets/app/') {
+                        withEnv(['DATREE_TOKEN=2e7eeda6-aeae-4d04-9ce1-5fd0f8e5edaf']) {
                         sh 'helm datree test . '
                     } 
                 }       
