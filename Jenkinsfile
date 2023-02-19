@@ -3,24 +3,22 @@ pipeline{
     environment{
         VERSION = "${env.BUILD_ID}"
     }
-
     stages{
-
-        stage ("sonar quality check"){
-            agent {
-                docker {
-                    image 'maven'
-                }
-            }
-            steps{
-                script{
-                    withSonarQubeEnv(credentialsId: 'sonar-token') {
-                        sh 'mvn clean package sonar:sonar'
+        stage("sonar quality check"){
+                agent {
+                    docker {
+                        image 'maven'
                     }
                 }
-            }      
-        
-        stage("docker build & docker push to nexus repo"){
+                steps {
+                    script{
+                        withSonarQubeEnv(credentialsId: 'sonar-token') {
+                            sh 'mvn clean package sonar:sonar'
+                    }
+                }
+             }
+        }
+         stage("docker build & docker push to nexus repo"){
             steps{
                 script{
                     withCredentials([string(credentialsId: 'nexus_passwd', variable: 'nexus_creds')]) {
@@ -36,6 +34,3 @@ pipeline{
         }
     }
 }
-}
-
- 
