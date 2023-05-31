@@ -57,37 +57,30 @@ This project is licensed under the MIT License.
 Feel free to customize this README file based on your specific CI/CD pipeline configuration and deployment process.
 
 # Screenshots
+# Screenshots
 
 <img width="960" alt="cicdpipeline" src="https://github.com/Simrankhott/CI-CD-project/assets/91006102/6eb3de85-02d1-4ab2-9887-30501ee5623c">
 
-<br>
 
 <img width="960" alt="dat2" src="https://github.com/Simrankhott/CI-CD-project/assets/91006102/a034af28-9c00-4d85-8161-b0b79ea9daa5">
 
-<br>
 
 <img width="960" alt="datree" src="https://github.com/Simrankhott/CI-CD-project/assets/91006102/2adc26f2-7696-450c-b9fd-b1c838493ca6">
 
-<br>
 
 <img width="960" alt="Screenshot_20230220_033114" src="https://github.com/Simrankhott/CI-CD-project/assets/91006102/99479665-1324-4bf3-9f04-eb1ec561d870">
 
-<br>
 
 <img width="960" alt="Screenshot_20230220_033225" src="https://github.com/Simrankhott/CI-CD-project/assets/91006102/8f0cb675-44dd-452a-ae29-568bbbf0d883">
 
-<br>
 
 <img width="960" alt="Screenshot_20230220_033527" src="https://github.com/Simrankhott/CI-CD-project/assets/91006102/fcd903b2-04cc-4e54-9b0c-fdf968be3208">
 
-<br>
 
 <img width="960" alt="sonarqube" src="https://github.com/Simrankhott/CI-CD-project/assets/91006102/97340e99-c150-4b98-ae7c-204a3ae366d0">
 
-<br>
 
 <img width="955" alt="sonarqubesuccess" src="https://github.com/Simrankhott/CI-CD-project/assets/91006102/75041bc3-1f9b-406b-a093-3262575ed795">
 
-<br>
 
 <img width="960" alt="successnexus" src="https://github.com/Simrankhott/CI-CD-project/assets/91006102/1411be99-64c0-47d5-a66a-7080e7b0348a">
