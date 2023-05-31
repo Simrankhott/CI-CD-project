@@ -66,7 +66,5 @@ Feel free to customize this README file based on your specific CI/CD pipeline co
 <img width="955" alt="sonarqubesuccess" src="https://github.com/Simrankhott/CI-CD-project/assets/91006102/75041bc3-1f9b-406b-a093-3262575ed795">
 <img width="960" alt="successnexus" src="https://github.com/Simrankhott/CI-CD-project/assets/91006102/1411be99-64c0-47d5-a66a-7080e7b0348a">
 
-This project is licensed under the MIT License.
 
-Feel free to customize this README file based on your specific CI/CD pipeline configuration and deployment process.
 
